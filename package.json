@@ -1,0 +1,14 @@
+{
+  "name": "opal",
+  "version": "0.0.1",
+  "description": "A front-end component library based on Vue.js",
+  "main": "./src/index.js",
+  "repository": "https://github.com/asahiP/Opal",
+  "author": "Luke Pan <asahi0749@gmail.com>",
+  "license": "MIT",
+  "private": false
+  "dependencies": {
+    "highlight.js": "^9.15.10",
+    "navy-scheme": "^0.0.1"
+  }
+}
