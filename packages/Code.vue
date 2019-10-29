@@ -1,24 +1,13 @@
 <template>
 <div opal :style="wrapperStyle" class="o-code-wrapper">
   <div :style="codeStyle">
-    <o-scroll v-if="!isParsing" :hook="syncScrollTop">
+    <o-scroll :hook="syncScrollTop">
       <pre
         class="o-code"
       >
-        <code v-html="highlightedCode"></code>
+        <code v-html="isParsing ? formattedCode.join('\r') : highlightedCode"></code>
       </pre>
     </o-scroll>
-    <div
-      v-else
-      class="o-code-isparsing"
-      :style="{
-        ...codeStyle,
-        left: 'unset',
-        width: '100%',
-        lineHeight: `${lodingHeight}px`,
-      }">
-      <span class="o-icon-loading"></span>
-    </div>
   </div>
   <pre
     v-html="indexText"
@@ -35,6 +24,13 @@ import hljs from 'highlight.js'
 export default {
   name: 'oCode',
 
+  props: {
+    text: {
+      type: String,
+      required: false,
+    }
+  },
+
   data () {
     return {
       code: '',
@@ -44,18 +40,15 @@ export default {
       scrollTop: 0,
       indexWidth: 0,
       indexHeight: 0,
-      lodingHeight: 16 * 1.3 * 5 + 10,
     }
   },
 
   computed: {
     wrapperStyle () {
-      let { indexHeight, isParsing, lodingHeight } = this
+      let { indexHeight } = this
 
       return {
-        height: isParsing
-          ? `${lodingHeight}px`
-          : `${indexHeight}px`
+        height: `${indexHeight}px`
       }
     },
     codeStyle () {
@@ -176,6 +169,14 @@ export default {
   },
 
   watch: {
+    text (newVal) {
+      this.code = newVal
+
+      this.$nextTick(() => {
+        this.indexWidth = this.$refs.index.offsetWidth
+        this.indexHeight = this.$refs.index.offsetHeight
+      })
+    },
     formattedCode (newVal) {
       this.highlightedCode = ''
       this.isParsing = true
@@ -189,10 +190,16 @@ export default {
   },
 
   mounted () {
-    this.code = this.$slots.default
-      .filter(({ tag, text }) => tag === undefined && text)
-      .map(({ text }) => text)
-      .join('\r')
+    let { text } = this
+
+    if (text) {
+      this.code = text
+    } else {
+      this.code = this.$slots.default
+        .filter(({ tag, text }) => tag === undefined && text)
+        .map(({ text }) => text)
+        .join('\r')
+    }
 
     this.$nextTick(() => {
       this.indexWidth = this.$refs.index.offsetWidth
