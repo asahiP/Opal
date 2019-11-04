@@ -66,14 +66,13 @@ export default {
               this.status = this.task.length === 0
                 ? ''
                 : 'created'
+              if (this.task.length <= 1) {
+                this.active = false
+              }
             })
 
             callback()
           }, delay)
-
-          if (this.task.length <= 1) {
-            this.active = false
-          }
         }
 
         this.active = true

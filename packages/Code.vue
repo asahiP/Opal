@@ -84,7 +84,7 @@ export default {
         }
       }
 
-      for (let i = end - 1; i > 0; i--) {
+      for (let i = end - 1; i >= 0; i--) {
         if (/[^\s]/g.test(lines[i])) {
           end = i + 1
           break
@@ -190,15 +190,13 @@ export default {
   },
 
   mounted () {
-    let { text } = this
+    let { text, $slots } = this
+    let child = $slots.default && $slots.default[0]
 
     if (text) {
       this.code = text
-    } else {
-      this.code = this.$slots.default
-        .filter(({ tag, text }) => tag === undefined && text)
-        .map(({ text }) => text)
-        .join('\r')
+    } else if (child && child.children && child.children[0]) {
+      this.code = child.children[0].text
     }
 
     this.$nextTick(() => {

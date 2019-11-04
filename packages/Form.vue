@@ -90,13 +90,15 @@ export default {
           let navy = new $Navy()
   
           for (let item of rules[key]) {
-            let { rule, matchedText, mismatchedText } = item
-
-            navy.rule([
-              fixedNameData[key],
-              rule,
-              [matchedText, mismatchedText]
-            ])
+            if (item && item instanceof Object) {
+              let { rule, matchedText, mismatchedText } = item
+  
+              navy.rule([
+                fixedNameData[key],
+                rule,
+                [matchedText, mismatchedText]
+              ])
+            }
           }
 
           let results = navy.judge()
@@ -107,7 +109,7 @@ export default {
             result[key].status = 'mismatched'
             result[key].rule = mismatched[0].rule
             result[key].text = mismatched[0].text
-          } else {
+          } else if (matched.length > 0) {
             let last = matched.length - 1
             result[key].status = 'matched'
             result[key].rule = matched[last].rule

@@ -204,7 +204,8 @@ export default {
       this.price = newVal
     },
     inputBundle () {
-      let { isFunction, datalist, isLoading, debounceID, priceHasValue, delay } = this
+      let { isFunction, datalist, isLoading, debounceID, priceHasValue, delay,
+        name, formName, hasParent, price, $parent } = this
 
       this.droplistActive = priceHasValue
 
@@ -225,6 +226,10 @@ export default {
             })
           }
         }, delay)
+      }
+
+      if (name && hasParent) {
+        $parent.syncData(formName, price)
       }
     },
     syncStatus (newVal) {

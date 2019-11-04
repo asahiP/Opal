@@ -291,14 +291,16 @@ export default {
       this.currentTop = 0
     },
     mousedownHandle (e) {
-      let { currentTop, currentLeft } = this
+      let { currentTop, currentLeft, useViewer } = this
       let { pageX, pageY } = e
 
-      this.mouseEvent = true
-      this.mousedownTop = currentTop
-      this.mousedownLeft = currentLeft
-      this.mousedownX = pageX
-      this.mousedownY = pageY
+      if (useViewer) {
+        this.mouseEvent = true
+        this.mousedownTop = currentTop
+        this.mousedownLeft = currentLeft
+        this.mousedownX = pageX
+        this.mousedownY = pageY
+      }
     },
     mousemoveHandle (e) {
       let { mousedownTop, mousedownLeft, mousedownX, mousedownY, mouseEvent, rotate } = this
@@ -339,13 +341,15 @@ export default {
   },
 
   mounted () {
-    let { emptyDestroyed, activationViewer, mousemoveHandle, mouseupHandle } = this
+    let { emptyDestroyed, activationViewer, mousemoveHandle, mouseupHandle, useViewer } = this
 
     emptyDestroyed()
 
-    window.addEventListener('click', activationViewer)
-    window.addEventListener('mousemove', mousemoveHandle)
-    window.addEventListener('mouseup', mouseupHandle)
+    if (useViewer) {
+      window.addEventListener('click', activationViewer)
+      window.addEventListener('mousemove', mousemoveHandle)
+      window.addEventListener('mouseup', mouseupHandle)
+    }
   }
 }
 </script>

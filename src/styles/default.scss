@@ -3,6 +3,9 @@
 
 /** 命名空间 */
 [opal] {
+  margin: 0;
+  padding: 0;
+
   color: $text-main-color;
   font-family: $default-font-family;
 
@@ -15,6 +18,7 @@
 
     color: $white;
     white-space: nowrap;
+    vertical-align: text-bottom;
 
     cursor: pointer;
     user-select: none;
@@ -29,7 +33,14 @@
       cursor: not-allowed;
     }
     &[class*=" is-circle"] {
+      width: 1em;
+      height: 1em;
+
       border-radius: 50%;
+
+      line-height: 1em;
+      
+      box-sizing: content-box;
     }
   }
 
@@ -37,7 +48,7 @@
     border: 1px solid $primary-color;
     background: $primary-color;
 
-    &:hover, &[class*=" is-disabled"] {
+    &:hover, &[class*=" is-disabled"], &[class*=" is-disabled"]:active {
       border: 1px solid $primary-light-color;
       background: $primary-light-color;
     }
@@ -54,7 +65,7 @@
 
     background: $white;
 
-    &:hover, &[class*=" is-disabled"] {
+    &:hover, &[class*=" is-disabled"], &[class*=" is-disabled"]:active {
       border: 1px solid $primary-light-color;
 
       color: $primary-light-color;
@@ -70,7 +81,7 @@
     border: 1px solid $success-color;
     background: $success-color;
 
-    &:hover, &[class*=" is-disabled"] {
+    &:hover, &[class*=" is-disabled"], &[class*=" is-disabled"]:active {
       border: 1px solid $success-light-color;
       background: $success-light-color;
     }
@@ -84,7 +95,7 @@
     border: 1px solid $warning-color;
     background: $warning-color;
 
-    &:hover, &[class*=" is-disabled"] {
+    &:hover, &[class*=" is-disabled"], &[class*=" is-disabled"]:active {
       border: 1px solid $warning-light-color;
       background: $warning-light-color;
     }
@@ -98,7 +109,7 @@
     border: 1px solid $danger-color;    
     background: $danger-color;
     
-    &:hover, &[class*=" is-disabled"] {
+    &:hover, &[class*=" is-disabled"], &[class*=" is-disabled"]:active {
       border: 1px solid $danger-light-color;    
       background: $danger-light-color;
     }
@@ -230,6 +241,8 @@
     position: relative;
 
     border-radius: $space-base;
+
+    vertical-align: bottom;
 
     background: $white;
   }
@@ -1011,8 +1024,6 @@
   &.o-tips {
     position: relative;
 
-    width: 100%;
-
     padding: $space-lg * 2;
     padding-left: $space-lg * 2 + $space-sm;
 
@@ -1194,7 +1205,7 @@
     vertical-align: middle;
 
     opacity: 0;
-    transition: opacity .3s ease-out;
+    transition: opacity .3s ease-out, z-index .3s ease-out;
 
     user-select: none;
 
