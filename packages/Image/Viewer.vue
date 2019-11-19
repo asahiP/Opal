@@ -108,9 +108,9 @@ export default {
       currentScale = currentScale / 100 * fixScale
       
       return {
-        transform: `rotate(${rotate}deg)`
-          + ` scale(${currentScale})`
-          + ` translate3d(${Math.floor(currentLeft / currentScale)}px, ${Math.floor(currentTop / currentScale)}px, 0)`,
+        transform: `rotate(${rotate || 0}deg)`
+          + ` scale(${currentScale || 1})`
+          + ` translate3d(${Math.floor(currentLeft / currentScale) || 0}px, ${Math.floor(currentTop / currentScale) || 0}px, 0)`,
         transition: mouseEvent ? '' : 'transform .3s ease-out',
       }
     },
@@ -175,6 +175,7 @@ export default {
         this.status = 'ready'
         this.imgWidth = imgWidth
         this.imgHeight = imgHeight
+        this.bestFit()
       })
       img.addEventListener('error', () => {
         this.status = 'error'
