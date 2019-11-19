@@ -35,6 +35,7 @@
         height: '35px',
         margin: 'auto',
         lineHeight: '35px',
+        textAlign: 'center',
       }"
     ></span>
   </o-scroll>

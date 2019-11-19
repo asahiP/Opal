@@ -28,6 +28,10 @@ export default {
     text: {
       type: String,
       required: false,
+    },
+    lang: {
+      type: String,
+      replaced: false,
     }
   },
 
@@ -178,11 +182,15 @@ export default {
       })
     },
     formattedCode (newVal) {
+      let { lang } = this
       this.highlightedCode = ''
       this.isParsing = true
+      newVal = newVal.join('\r')
 
       setTimeout(() => {
-        let { value } = hljs.highlightAuto(newVal.join('\r'))
+        let { value } = lang
+          ? hljs.highlight(lang, newVal)
+          : hljs.highlightAuto(newVal)
         this.highlightedCode = value
         this.isParsing = false
       }, 0)

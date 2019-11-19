@@ -145,7 +145,7 @@ export default {
     if (hasParent && name) {
       $parent.addChild(this)
       
-      if (value) {
+      if (value.length) {
         $parent.syncData(formName, value)
       }
     }

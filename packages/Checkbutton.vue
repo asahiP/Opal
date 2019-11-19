@@ -23,10 +23,10 @@
     >
       <span v-if="icon && !loading" :class="icon"></span>
       <span v-if="loading" class="o-icon-loading"></span>
-      <span v-if="$slots.default" style="position: relative">
+      <span v-if="$slots.default && !circle" style="position: relative">
         <slot />
       </span>
-      <span v-else v-text="price"></span>
+      <span v-else-if="!circle" v-text="price"></span>
     </div>
   </div>
 </template>

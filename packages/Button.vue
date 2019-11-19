@@ -16,7 +16,7 @@
   >
     <span v-if="icon && !loading" :class="icon"></span>
     <span v-if="loading" class="o-icon-loading"></span>
-    <span v-if="$slots.default">
+    <span v-if="$slots.default && !circle">
       <slot />
     </span>
   </button>

@@ -18,7 +18,7 @@
 
     color: $white;
     white-space: nowrap;
-    vertical-align: text-bottom;
+    vertical-align: middle;
 
     cursor: pointer;
     user-select: none;
@@ -242,7 +242,7 @@
 
     border-radius: $space-base;
 
-    vertical-align: bottom;
+    vertical-align: middle;
 
     background: $white;
   }
@@ -506,6 +506,7 @@
 
     color: $text-sub-color;
     line-height: $stepper-height;
+    text-align: center;
 
     background: rgba($light-gray, .4);
 
@@ -551,7 +552,9 @@
     font-size: $fontsize-base;
     line-height: $fontsize-lg;
     text-align: left;
-    vertical-align: bottom;
+    vertical-align: middle;
+
+    background: $white;
 
     box-sizing: border-box;
   }
@@ -590,7 +593,7 @@
     font-size: $fontsize-base;
     white-space: nowrap;
     text-overflow: ellipsis;
-    vertical-align: bottom;
+    vertical-align: middle;
 
     box-sizing: border-box;
   }
@@ -633,7 +636,7 @@
     border-color: $primary-color;
     border-radius: $switch-height;
 
-    vertical-align: text-top;
+    vertical-align: middle;
 
     transition: all .2s linear;
 
@@ -674,7 +677,7 @@
   & .o-switch-text {
     color: $text-main-color;
     line-height: $switch-height;
-    vertical-align: text-top;
+    vertical-align: middle;
 
     &:first-child {
       margin-right: $space-base;
@@ -879,7 +882,7 @@
     margin-left: $space-sm;
 
     color: rgba($text-placeholder-color, .5);
-    vertical-align: text-top;
+    vertical-align: middle;
 
     transform: scale(-1, 1);
   }
@@ -997,6 +1000,8 @@
     margin: 0 $space-sm;
     padding: $space-base 0;
 
+    text-align: center;
+
     box-sizing: border-box;
 
     cursor: pointer;
@@ -1045,7 +1050,7 @@
     }
 
     & > * {
-      margin-top: $space-lg * 2;
+      margin-top: $space-lg;
     }
     & > *:first-child {
       margin-top: unset;
@@ -1323,6 +1328,7 @@
 
     color: $text-sub-color;
     font-size: 40px;
+    vertical-align: middle;
 
     background: $white;
   }
@@ -1487,9 +1493,16 @@
   &.o-radio-large,
   &.o-checkbox-large,
   &.o-checkbutton-large {
-    padding: $space-base;
+    padding: $space-sm;
 
     font-size: $fontsize-lg;
+  }
+
+  &.o-radio-normal,
+  &.o-checkbox-normal,
+  &.o-radio-large,
+  &.o-checkbox-large {
+    padding: unset;
   }
 }
 

@@ -45,7 +45,7 @@
         visibility: price.length > 0 ? '' : 'hidden',
         cursor: 'pointer',
       }"
-      @click="price = ''"
+      @click="clean"
     ></span>
     <o-droplist
       v-model="droplistActive"
@@ -133,12 +133,17 @@ export default {
       type: Number,
       required: false,
       default: 300,
+    },
+    filter: {
+      type: Boolean,
+      required: false,
+      default: true,
     }
   },
 
   model: {
     prop: 'value',
-    event: 'blur',
+    event: 'input',
   },
 
   data () {
@@ -174,11 +179,13 @@ export default {
       }
     },
     filteredDataList () {
-      let { dataList, priceHasValue, price } = this
+      let { dataList, priceHasValue, price, filter } = this
 
-      return priceHasValue
-        ? dataList.filter(({ value }) => typeof value === 'string' && value.includes(price))
-        : []
+      return filter
+        ? priceHasValue
+          ? dataList.filter(({ value }) => typeof value === 'string' && value.includes(price))
+          : []
+        : dataList
     },
     priceHasValue () {
       return this.price.length > 0
@@ -201,7 +208,14 @@ export default {
       }
     },
     pickItem (newVal) {
+      let { name, formName, hasParent, $parent } = this
+      
       this.price = newVal
+      this.$emit('blur', newVal)
+
+      if (name && hasParent) {
+        $parent.syncData(formName, newVal)
+      }
     },
     inputBundle () {
       let { isFunction, datalist, isLoading, debounceID, priceHasValue, delay,
@@ -230,6 +244,18 @@ export default {
 
       if (name && hasParent) {
         $parent.syncData(formName, price)
+      }
+
+      this.$emit('input', price)
+    },
+    clean () {
+      let { name, hasParent, formName, $parent } = this
+
+      this.price = ''
+      this.$emit('input', '')
+
+      if (name && hasParent) {
+        $parent.syncData(formName, '')
       }
     },
     syncStatus (newVal) {

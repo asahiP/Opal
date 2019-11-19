@@ -79,11 +79,11 @@ export default {
     /**
      * @param {object} rules - 格式 { [name]: [{ rule, matchedText, mismatchedText }] }
      */
-    getValidate (rules) {
+    getValidate (rules, data) {
       let { $Navy, fixedNameData } = this
       let result = {}
         
-      Object.keys(fixedNameData).forEach(key => {
+      Object.keys(data || fixedNameData).forEach(key => {
         if (rules.hasOwnProperty(key) && Array.isArray(rules[key])) {
           result[key] = {}
 

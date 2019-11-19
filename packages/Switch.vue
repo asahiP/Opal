@@ -13,7 +13,7 @@
       v-text="prefix"
       :class="[
         'o-switch-text',
-        { 'o-switch-text-active': !checked }
+        { 'o-switch-text-active': !price }
       ]"
     ></span>
     <input
@@ -22,7 +22,7 @@
       style="display: none"
       @change="changeBundle"
       :disabled="disabled"
-      :checked="checked"
+      :checked="price"
       ref="input"
     >
     <span opal class="o-switch-block"></span>
@@ -31,7 +31,7 @@
       v-text="suffix"
       :class="[
         'o-switch-text',
-        { 'o-switch-text-active': checked }
+        { 'o-switch-text-active': price }
       ]"
     ></span>
   </label>
@@ -72,7 +72,7 @@ export default {
   },
 
   data () {
-    return { hasParent: false }
+    return { hasParent: false, price: false }
   },
 
   computed: {
@@ -88,6 +88,7 @@ export default {
       let { name, formName, hasParent, $parent } = this
       let { checked } = e.target
       
+      this.price = checked
       this.$emit('change', checked)
 
       if (name && hasParent) {
@@ -106,14 +107,19 @@ export default {
       if (name && hasParent) {
         $parent.syncData(formName, newVal)
       }
+
+      this.price = newVal
     }
   },
 
   mounted () {
-    let { $parent, name, checked, formName } = this
+    let { $parent, name, checked, formName, syncStatus } = this
     let hasParent = $parent && $parent.name === 'opal-form-component'
 
     this.hasParent = hasParent
+    this.price = checked
+
+    syncStatus(checked)
 
     if (hasParent && name) {
       $parent.addChild(this)

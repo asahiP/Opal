@@ -13,7 +13,7 @@
     >
       <slot v-if="$slots.default"/>
       <template v-else>
-        <thead v-if="data.head">
+        <thead v-if="data && data.head">
           <tr>
             <th
               v-for="({ prop, label, sortable, width }, index) in data.head"
@@ -45,7 +45,7 @@
             </th>
           </tr>
         </thead>
-        <tbody v-if="data.body">
+        <tbody v-if="data && data.body">
           <tr
             v-for="(item, index) in body"
             :key="'tr-item-' + index"
@@ -70,9 +70,11 @@ export default {
 
   props: {
     width: {
+      type: [Number, String],
       required: false,
     },
     height: {
+      type: [Number, String],
       required: false,
     },
     border: {

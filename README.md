@@ -1,34 +1,8 @@
-# opal
+<h1 align="center">
+    <img src="https://raw.githubusercontent.com/asahiP/Opal/master/public/logo.png"/>
+    <h5 align="center">
+        <i><b>A front-end component library based on Vue.js.</b></i><br>
+        <a href="https://asahip.github.io/Opal-docs/">Documents</a>
+    </h5>
+</h1>
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Run your unit tests
-```
-yarn run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
