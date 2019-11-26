@@ -178,6 +178,18 @@ export default {
 
       return iconClass
     },
+  },
+
+  mounted () {
+    window.addEventListener('popstate', () => {
+      let { delay } = this
+      this.status = ''
+
+      setTimeout(() => {
+        this.task = []
+        this.active = false
+      }, delay)
+    })
   }
 }
 </script>

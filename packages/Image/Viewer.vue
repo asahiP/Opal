@@ -350,6 +350,9 @@ export default {
       window.addEventListener('click', activationViewer)
       window.addEventListener('mousemove', mousemoveHandle)
       window.addEventListener('mouseup', mouseupHandle)
+      window.addEventListener('popstate', () => {
+        this.active = false
+      })
     }
   }
 }

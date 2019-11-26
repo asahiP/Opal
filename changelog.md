@@ -1,4 +1,8 @@
-### Opal [ v0.0.3 ] - 2019 / 09 / 18
+### Opal [ v0.0.6 ] - 2019 / 11 / 26
+
+* 修复：Alert`<Package>` 与 Image`<Package>` 在激活状态下操作路由无法关闭窗口的情况
+
+### Opal [ v0.0.3 ] - 2019 / 11 / 18
 
 - 新增：CSS文件中全局属性的`margin: 0`和`padding: 0`
 - 新增：Input`<Package>`的`Trigger: blur => blur, input`
